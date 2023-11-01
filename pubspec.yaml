@@ -1,0 +1,55 @@
+name: simple_parking
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #UI
+  cupertino_icons: ^1.0.2
+  google_fonts: 6.1.0
+  fluttertoast: 8.2.2
+
+  #UTILS
+  mobx: 2.2.1
+  flutter_mobx: 2.1.1
+  shared_preferences: 2.2.2
+  retrofit: 4.0.3
+  retrofit_generator: 8.0.2
+  mobx_codegen: 2.4.0
+  build_runner: 2.4.6
+  uuid: 4.1.0
+  social_share: 2.3.1
+  get_it: 7.6.4
+  json_serializable: 6.7.1 
+  dio: 5.3.3
+  json_annotation: 4.8.1
+  permission_handler: 11.0.1
+  csv: 5.1.1
+  path_provider: 2.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: 0.13.1
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/icons/icon.png"
+  remove_alpha_ios: true
+
+flutter:
+  assets:
+    - assets/
+    - assets/images/
+    - assets/icons/
+  uses-material-design: true
