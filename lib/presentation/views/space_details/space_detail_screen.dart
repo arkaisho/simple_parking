@@ -154,7 +154,7 @@ class _SpaceDetailsScreenState extends State<SpaceDetailsScreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(30),
                                   child: Image.asset(
-                                    "assets/images/d0242b54e1cfb109a44c3b0ed2f6e0d2.png",
+                                    "assets/images/side_truck.png",
                                     width: MediaQuery.of(context).size.width,
                                   ),
                                 ),

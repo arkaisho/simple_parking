@@ -216,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       if (space.parkedVehicle !=
                                                           null)
                                                         Image.asset(
-                                                          "assets/images/d0242b54e1cfb109a44c3b0ed2f6e0d2.png",
+                                                          "assets/images/side_truck.png",
                                                           height: 40,
                                                         ),
                                                       const SizedBox(width: 10),
