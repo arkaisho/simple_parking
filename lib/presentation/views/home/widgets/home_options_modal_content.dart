@@ -28,6 +28,7 @@ class HomeOptionsModalContent extends StatelessWidget {
                   Navigator.pop(context);
                   showModalBottomSheet(
                     context: context,
+                    isScrollControlled: true,
                     builder: (context) {
                       return ParkingFloorCreationModalContent(
                         onConfirm: (floor) {
@@ -52,6 +53,7 @@ class HomeOptionsModalContent extends StatelessWidget {
                   Navigator.pop(context);
                   showModalBottomSheet(
                     context: context,
+                    isScrollControlled: true,
                     builder: (context) {
                       return ParkingFloorDeleteModalContent(
                         onConfirm: (floorId) {

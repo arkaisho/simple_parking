@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     showModalBottomSheet(
                                       context: context,
+                                      isScrollControlled: true,
                                       builder: (context) {
                                         return const HomeOptionsModalContent();
                                       },
@@ -110,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onTap: () {
                                         showModalBottomSheet(
                                           context: context,
+                                          isScrollControlled: true,
                                           builder: (context) {
                                             return ParkingSpaceCreationModalContent(
                                               onConfirm: (space) {
@@ -141,89 +143,111 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: MediaQuery.of(context).size.width,
                                 child: Column(
                                   children: [
-                                    ...filteredSpaces(floor)
-                                        .map(
-                                          (space) => GestureDetector(
-                                            onTap: () async {
-                                              parkingStore.setSelectedFloor(
-                                                floor,
-                                              );
-                                              parkingStore
-                                                  .setSelectedParkingSpace(
-                                                space,
-                                              );
-                                              await Navigator.pushNamed(
-                                                context,
-                                                SpaceDetailsScreen.routeName,
-                                              );
-                                              setState(() {});
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                border: Border(
-                                                  top: BorderSide(
-                                                    width: 1,
-                                                    color: CustomColors.white
-                                                        .withOpacity(
-                                                      .1,
-                                                    ),
-                                                  ),
+                                    ...filteredSpaces(floor).isEmpty
+                                        ? [
+                                            Padding(
+                                              padding: const EdgeInsets.all(20),
+                                              child: Text(
+                                                "Nenhuma vaga",
+                                                style: Fonts.headline5.copyWith(
+                                                  color: CustomColors.gray,
                                                 ),
-                                                gradient: space.status !=
-                                                        ParkingSpaceStatus
-                                                            .filled
-                                                    ? LinearGradient(
-                                                        colors: [
-                                                          Colors.transparent,
-                                                          CustomColors.primary
-                                                              .withOpacity(1),
-                                                        ],
-                                                      )
-                                                    : null,
                                               ),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: 5,
-                                                    height: 50,
-                                                    color: space.status ==
+                                            )
+                                          ]
+                                        : filteredSpaces(floor)
+                                            .map(
+                                              (space) => GestureDetector(
+                                                onTap: () async {
+                                                  parkingStore.setSelectedFloor(
+                                                    floor,
+                                                  );
+                                                  parkingStore
+                                                      .setSelectedParkingSpace(
+                                                    space,
+                                                  );
+                                                  await Navigator.pushNamed(
+                                                    context,
+                                                    SpaceDetailsScreen
+                                                        .routeName,
+                                                  );
+                                                  setState(() {});
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    border: Border(
+                                                      top: BorderSide(
+                                                        width: 1,
+                                                        color: CustomColors
+                                                            .white
+                                                            .withOpacity(
+                                                          .1,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    gradient: space.status !=
                                                             ParkingSpaceStatus
                                                                 .filled
-                                                        ? CustomColors.yellow
+                                                        ? LinearGradient(
+                                                            colors: [
+                                                              Colors
+                                                                  .transparent,
+                                                              CustomColors
+                                                                  .primary
+                                                                  .withOpacity(
+                                                                      1),
+                                                            ],
+                                                          )
                                                         : null,
                                                   ),
-                                                  const SizedBox(width: 10),
-                                                  if (space.parkedVehicle !=
-                                                      null)
-                                                    Image.asset(
-                                                      "assets/images/d0242b54e1cfb109a44c3b0ed2f6e0d2.png",
-                                                      height: 40,
-                                                    ),
-                                                  const SizedBox(width: 10),
-                                                  const Spacer(),
-                                                  Text(
-                                                    space.parkedVehicle != null
-                                                        ? space.parkedVehicle!
-                                                            .plate
-                                                        : "",
-                                                    style: Fonts.headline5
-                                                        .copyWith(
-                                                      color: CustomColors.white,
-                                                    ),
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        width: 5,
+                                                        height: 50,
+                                                        color: space.status ==
+                                                                ParkingSpaceStatus
+                                                                    .filled
+                                                            ? CustomColors
+                                                                .yellow
+                                                            : null,
+                                                      ),
+                                                      const SizedBox(width: 10),
+                                                      if (space.parkedVehicle !=
+                                                          null)
+                                                        Image.asset(
+                                                          "assets/images/d0242b54e1cfb109a44c3b0ed2f6e0d2.png",
+                                                          height: 40,
+                                                        ),
+                                                      const SizedBox(width: 10),
+                                                      const Spacer(),
+                                                      Text(
+                                                        space.parkedVehicle !=
+                                                                null
+                                                            ? space
+                                                                .parkedVehicle!
+                                                                .plate
+                                                            : "",
+                                                        style: Fonts.headline5
+                                                            .copyWith(
+                                                          color: CustomColors
+                                                              .white,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        " ${floor.code}${space.number}  ",
+                                                        style: Fonts.headline4
+                                                            .copyWith(
+                                                          color: CustomColors
+                                                              .white,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    " ${floor.code}${space.number}  ",
-                                                    style: Fonts.headline4
-                                                        .copyWith(
-                                                      color: CustomColors.white,
-                                                    ),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                        )
-                                        .toList(),
+                                            )
+                                            .toList(),
                                     Container(
                                       height: 1,
                                       color: CustomColors.white.withOpacity(
@@ -255,9 +279,10 @@ class _HomeScreenState extends State<HomeScreen> {
             "${floor.code}${space.number}".toLowerCase().contains(
                   parkingStore.searchFilter.toLowerCase(),
                 );
-        bool spaceNameContainsFilter = space.name.toLowerCase().contains(
-              parkingStore.searchFilter.toLowerCase(),
-            );
+        bool spaceNameContainsFilter = space.name != null &&
+            space.name!.toLowerCase().contains(
+                  parkingStore.searchFilter.toLowerCase(),
+                );
         bool spaceNumberContainsFilter =
             space.number.toString().toLowerCase().contains(
                   parkingStore.searchFilter.toLowerCase(),

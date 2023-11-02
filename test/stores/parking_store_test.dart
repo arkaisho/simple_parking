@@ -85,7 +85,7 @@ void main() {
       ParkingSpace space = getPopulatedSpace(floor);
       String? path;
       path = await parkingStore.exportSpaceRegisters(
-        spaceName: space.name,
+        spaceName: space.name ?? "${floor.code}${space.number}",
         registers: space.registers,
       );
 
@@ -197,7 +197,7 @@ ParkingSpace spaceMock(String newSpaceId) {
   return ParkingSpace(
     id: newSpaceId,
     name: 'new space name',
-    number: 1,
+    number: '1',
   );
 }
 

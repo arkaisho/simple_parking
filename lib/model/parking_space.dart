@@ -7,15 +7,15 @@ part "parking_space.g.dart";
 @JsonSerializable()
 class ParkingSpace {
   String id;
-  String name;
-  int number;
+  String? name;
+  String number;
   Vehicle? parkedVehicle;
   DateTime? currentVehicleEntryTime;
   List<VehicleRegister> registers;
 
   ParkingSpace({
     required this.id,
-    required this.name,
+    this.name,
     required this.number,
     this.parkedVehicle,
     this.currentVehicleEntryTime,

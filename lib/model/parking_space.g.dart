@@ -8,8 +8,8 @@ part of 'parking_space.dart';
 
 ParkingSpace _$ParkingSpaceFromJson(Map<String, dynamic> json) => ParkingSpace(
       id: json['id'] as String,
-      name: json['name'] as String,
-      number: json['number'] as int,
+      name: json['name'] as String?,
+      number: json['number'] as String,
       parkedVehicle: json['parkedVehicle'] == null
           ? null
           : Vehicle.fromJson(json['parkedVehicle'] as Map<String, dynamic>),

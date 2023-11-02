@@ -43,6 +43,7 @@ class _SpaceDetailsScreenState extends State<SpaceDetailsScreen> {
               if (parkingStore.selectedParkingSpace?.parkedVehicle != null) {
                 showModalBottomSheet(
                   context: context,
+                  isScrollControlled: true,
                   builder: (context) {
                     return VehicleDepartureModalContent(
                       onConfirm: () {
@@ -60,6 +61,7 @@ class _SpaceDetailsScreenState extends State<SpaceDetailsScreen> {
               } else {
                 showModalBottomSheet(
                   context: context,
+                  isScrollControlled: true,
                   builder: (context) {
                     return VehicleArrivalModalContent(
                       onConfirm: (plate) {
@@ -80,7 +82,7 @@ class _SpaceDetailsScreenState extends State<SpaceDetailsScreen> {
             backgroundColor: CustomColors.tertiary,
             centerTitle: true,
             title: Text(
-              "${parkingStore.selectedFloor?.code}${parkingStore.selectedParkingSpace?.number} - ${parkingStore.selectedParkingSpace?.name}",
+              "${parkingStore.selectedFloor?.code}${parkingStore.selectedParkingSpace?.number}${parkingStore.selectedParkingSpace?.name != null && parkingStore.selectedParkingSpace!.name!.isNotEmpty ? ' - ${parkingStore.selectedParkingSpace?.name}' : ''}",
               style: Fonts.headline3.copyWith(
                 color: CustomColors.black,
               ),
@@ -92,6 +94,7 @@ class _SpaceDetailsScreenState extends State<SpaceDetailsScreen> {
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
+                      isScrollControlled: true,
                       builder: (context) {
                         return ParkingSpaceDeleteModalContent(
                           onConfirm: () {
@@ -101,7 +104,8 @@ class _SpaceDetailsScreenState extends State<SpaceDetailsScreen> {
                               spaceid: parkingStore.selectedParkingSpace!.id,
                             );
                           },
-                          spaceName: parkingStore.selectedParkingSpace!.name,
+                          spaceName: parkingStore.selectedParkingSpace!.name ??
+                              "${parkingStore.selectedFloor!.code}${parkingStore.selectedParkingSpace!.id}",
                         );
                       },
                     );

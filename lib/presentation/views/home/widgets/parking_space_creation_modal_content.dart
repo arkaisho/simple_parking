@@ -20,10 +20,9 @@ class ParkingSpaceCreationModalContent extends StatefulWidget {
 
 class _ParkingSpaceCreationModalContentState
     extends State<ParkingSpaceCreationModalContent> {
-  int? number;
+  String number = "";
   String name = "";
   String numberError = "";
-  String nameError = "";
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -65,23 +64,11 @@ class _ParkingSpaceCreationModalContentState
                         child: Column(
                           children: [
                             SizedBox(
-                              height: 15,
-                              child: Text(
-                                nameError,
-                                style: Fonts.caption.copyWith(
-                                  color: nameError.isNotEmpty
-                                      ? CustomColors.red
-                                      : Colors.transparent,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
                               height: 40,
                               child: Center(
                                 child: CustomTextFormField(
                                   onChanged: (value) {
                                     name = value ?? "";
-                                    setState(() => nameError = "");
                                   },
                                 ),
                               ),
@@ -129,7 +116,7 @@ class _ParkingSpaceCreationModalContentState
                               child: CustomTextFormField(
                                 onChanged: (value) {
                                   if (value != null && value.isNotEmpty) {
-                                    number = int.parse(value);
+                                    number = value;
                                     setState(() => numberError = "");
                                   }
                                 },
@@ -153,27 +140,20 @@ class _ParkingSpaceCreationModalContentState
                 ),
                 child: GestureDetector(
                   onTap: () {
-                    if (number != null && name.isNotEmpty) {
+                    if (number.isNotEmpty) {
                       Navigator.pop(context);
                       widget.onConfirm(
                         ParkingSpace(
                           id: const Uuid().v4(),
                           name: name,
-                          number: number!,
+                          number: number.toString(),
                           registers: [],
                         ),
                       );
                     } else {
-                      if (number == null) {
-                        setState(() {
-                          numberError = "Insira um número";
-                        });
-                      }
-                      if (name.isEmpty) {
-                        setState(() {
-                          nameError = "Insira um nome";
-                        });
-                      }
+                      setState(() {
+                        numberError = "Insira um número";
+                      });
                     }
                   },
                   child: Container(
