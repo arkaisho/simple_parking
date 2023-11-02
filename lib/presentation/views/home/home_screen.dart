@@ -66,19 +66,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: CustomColors.primary,
                                 ),
                               )
-                            : SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      isScrollControlled: true,
-                                      builder: (context) {
-                                        return const HomeOptionsModalContent();
-                                      },
-                                    );
-                                  },
+                            : GestureDetector(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (context) {
+                                      return const HomeOptionsModalContent();
+                                    },
+                                  );
+                                },
+                                child: SizedBox(
+                                  width: 20,
+                                  height: 20,
                                   child: Icon(
                                     Icons.more_vert,
                                     color: CustomColors.white,
